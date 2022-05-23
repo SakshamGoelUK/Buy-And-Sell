@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+ <link rel="stylesheet" href="/stylesheets/products.css">
+ <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css"/>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ <link rel="shortcut icon" href="/images/logo.ico">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="stylesheet" href="/stylesheets/style.css">
+ <link rel="stylesheet" type="text/css" href="/stylesheets/stars.css" />
+ <link rel="stylesheet" href="/stylesheets/cookie.css" />
+ <link href="/stylesheets/footer.css" rel="stylesheet" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <% if(req.user){ %>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="/js/navsocket.js"></script>
+<% } %>
+ <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Staatliches&display=swap" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+    <div class="flash" style="position: fixed;z-index: 4;width: 100%;">
+        <%- include('./partials/flash') %>
+    </div>
+    <%- include('./partials/navbar') %>
+
+    <div class="menu-btn">
+        <div class="menu-btn-burger">
+
+        </div>
+      </div>
+      <div class="page" >
+          <div class="phonefilter">
+              <h4>Filters</h4>
+              <h5 style="margin-top: 30px;">Categories</h5>
+              <% categoriesList.map((category)=>{ %>
+                  <div class="form-check">
+                  <% if(category.toLowerCase()===checked.toLowerCase()){ %>
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick="window.location = 'http://localhost:3000/products/allItems/filters/<%=category%>'" checked>
+                  <% }else{ %>
+
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick="window.location = 'http://localhost:3000/products/allItems/filters/<%=category%>'">
+                          <% } %>
+                          <label class="form-check-label" for="flexRadioDefault2" />
+                          <%=category.replaceAll('_',' ')%>
+                      </label>
+                  </div>
+            <%  }) %>
+
+    <h5 class="mt-5">Product Rating</h5>
+    <% for(let i=0;i<5;i++){  %>
+      <div class="form-check ">
+          <% if(parseInt(rating)===i+1){ %>
+          <input class="form-check-input ratingFilter " type="radio" name="<%=i+1%>" id="flexRadioDefault2" checked style="border-radius: 20%;">
+          <% }else{ %>
+          <input class="form-check-input ratingFilter " type="radio" name="<%=i+1%>" id="flexRadioDefault2" style="border-radius: 20%;">
+
+      <% } %>
+          <label class="form-check-label" for="flexRadioDefault2" />
+          <p
+          class="starability-result"
+          data-rating="<%=i+1%>"
+          class="p-3"
+        ></p>
+          </label>
+      </div>
+    <% } %>
+
+
+              </div>
+        <div class="filter" style="font-weight: 700;">
+            <div class="filter1">
+
+            <h4>Filters</h4>
+            <h5 style="margin-top: 30px;">Categories</h5>
+            <% categoriesList.map((category)=>{ %>
+                <div class="form-check">
+                <% if(category.toLowerCase()===checked.toLowerCase()){ %>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick="window.location = 'http://localhost:3000/products/allItems/filters/<%=category%>'" checked>
+                <% }else{ %>
+
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick="window.location = 'http://localhost:3000/products/allItems/filters/<%=category%>'">
+                        <% } %>
+                        <label class="form-check-label" for="flexRadioDefault2" />
+                        <%=category.replaceAll('_',' ')%>
+                    </label>
+                </div>
+          <%  }) %>
+          <h5 class="mt-5">Price</h5>
+          <select class="form-select priceFilter" aria-label="Default select example">
+            <%  priceOptions.map((opt)=>{ %>
+<%  if(opt.value === price){ %>
+    <option value = "<%=opt.value%>" selected><%=opt.name%></option>
+
+<% }else{ %>
+    <option value = "<%=opt.value%>"><%=opt.name%></option>
+
+<% } %>
+             <% }) %>
+          </select>
+<h5 class="mt-5">Product Rating</h5>
+<% for(let i=0;i<5;i++){  %>
+    <div class="form-check ">
+        <% if(parseInt(rating)===i+1){ %>
+        <input class="form-check-input ratingFilter " type="radio" name="<%=i+1%>" id="flexRadioDefault2" checked style="border-radius: 20%;">
+        <% }else{ %>
+        <input class="form-check-input ratingFilter " type="radio" name="<%=i+1%>" id="flexRadioDefault2" style="border-radius: 20%;">
+
+    <% } %>
+        <label class="form-check-label" for="flexRadioDefault2" />
+        <p
+        class="starability-result"
+        data-rating="<%=i+1%>"
+        class="p-3"
+      ></p>
+        </label>
+    </div>
+<% } %>
+
+            </div>
+            </div>
+            <div class="stuff">
+
+             <% products.map((product)=>{ %>
+                <% if(product.advertize === 'on'){ %>
+                <div class="cards" id="<%=product.productID%>">
+                    <div class="image"><img src="<%=product.picture%>" style="object-fit: cover;"></div>
+
+
+                    <div class="caption">
+                        <div class="row">
+
+                            <div class="col-9">
+                                <div class="button1" style="display: inline-block;">
+                                    <a href="#"><%= product.Price %>£ </a><a class="cart-btn" href="/products/item?productID=<%= product.productID %>"><i class="cart-icon ion-bag"></i>Check it out</a>
+                                </div>
+
+                            </div>
+                            <div class="heart col-3 mt-2">
+                                <%if(req.user){ %>
+                                    <% if(req.session.likedProducts.includes(product.productID) && req.session.likedProducts != []){ %>
+                                <button class="unlike" style="display: inline;"><img src="/images/heart.svg" alt="Unlike Button" height="20px" width="20px"></button>
+                                <button class="heartBtn" style="display: none;"><img src="/images/heart_outline.svg" alt="Like button" height="20px" width="20px"></button>
+    <% }else{ %>
+        <button class="unlike" style="display:none;"><img src="/images/heart.svg" alt="Unlike Button" height="20px" width="20px"></button>
+        <button class="heartBtn" style="display: inline;"><img src="/images/heart_outline.svg" alt="Like button" height="20px" width="20px"></button>
+    <% } %>
+    <% }else{ %>
+
+        <button type="button" data-bs-toggle="modal" data-bs-target="#modal" style="border: none;background: transparent;">
+            <img src="/images/heart_outline.svg"  alt="Likes" height="20px" width="20px">
+          </button>
+
+          <% } %>
+                                <span class="likesCount"><%= product.Likes %></span>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11">
+                                <h5 style="font-weight:700;"><%= product.Name %> </h5>
+                            </div>
+                        </div>
+                        <span id="details">
+
+    <div class="row">
+
+    </div>
+
+                            <div class="captions">
+                                <%= product.Description %>
+                            </div>
+                        </span>
+                    </div>
+                       </div>
+            <% }%>
+    <% }) %>
+         </div>
+        </div>
+        <% if(req.session['Cookies-Accepted'] === undefined){ %>
+        <%- include('./partials/cookies') %>
+        <% } %>
+        <%- include('./partials/footer') %>
+
+<% if(!req.user){ %>
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+
+                <div class="modal1 active">
+                  <div class="warning">
+                  <img src="https://www.svgrepo.com/show/8646/login.svg" width="25px" height="25px" alt="">
+                  </div>
+                  <div class="heading"></div>
+                  <div class="content">
+                    <span>Oh snap!</span>
+                    <p>You need to login to like items.😅<br>
+                      </p>
+                  </div>
+                  <div class="footer">
+                    Dismiss
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+
+<% } %>
+<script>
+
+const menuBtn = document.querySelector('.menu-btn')
+const phonefilter = document.querySelector('.phonefilter')
+const stuff = document.querySelector('.stuff')
+  let open = false
+  const menu = () =>{
+      if(!open){
+          menuBtn.classList.add('open')
+          open = true
+          stuff.style.justifyContent = 'flex-end'
+          phonefilter.style.display = 'block'
+          phonefilter.style.transform = 'translateX(0px)'
+        }else{
+            menuBtn.classList.remove('open')
+            stuff.style.justifyContent = 'flex-start'
+            phonefilter.style.display = 'absolute'
+            phonefilter.style.transform = 'translateX(-10000px)'
+          open = false
+      }
+
+  }
+  menuBtn.addEventListener('click',menu)
+menuBtn.addEventListener('click',menu)</script>
+<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/allProducts.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+    ScrollReveal().reveal('.cards')
+
+</script>
+</body>
+</html>

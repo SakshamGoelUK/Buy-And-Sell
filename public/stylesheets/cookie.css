@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+div.cookie{
+margin-left: 10px;
+margin-bottom:10px ;
+    text-align: center;
+    position:-webkit-sticky;
+    position:fixed;
+    width: 18rem;
+    height: 13rem;
+    padding: 15px;
+    border:2px solid black;
+    background-color: white;
+    border-radius: 10px;
+    bottom: 0px;
+    z-index: 1000;
+}
+div.cookie h4{
+    font-weight: 700;
+    color: rgb(92, 16, 180);
+font-weight: 500px;
+}
+div.cookie h5{
+
+    font-size: 16px;
+    text-align:start
+}
+#cookieImage{
+    transform: translate(180%,-50%);
+    position: absolute;
+}
+.cookieBtn{
+    width: 16rem;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    border: 2px solid rgb(102, 102, 224);
+    font-weight: 600;
+    transition: 200ms;
+}
+.cookieBtn:hover{
+    color: black;
+    background-color:rgb(210, 228, 255) ;
+}

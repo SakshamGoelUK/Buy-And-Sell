@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h4 {
+  text-align: center;
+  color: tomato;
+}
+div.card {
+  border-radius: 10px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  background: inherit;
+  overflow: hidden;
+  padding: 1em;
+}
+input {
+  line-height: 1000px;
+}
+div.card::before {
+  content: "";
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba(226, 215, 215, 0.5);
+  -webkit-filter: blur(20px);
+          filter: blur(20px);
+  margin: -20px;
+}
+form > div {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+label.form-check-label {
+  color: tomato;
+}
+body{
+  background-image: url(../images/purple-bg.svg);
+
+  background-attachment: fixed;
+  background-size: 100%;
+}
+
+div.card1 {
+  text-align: center;
+  padding-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+div.flash {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 600px;
+}
+p.sent {
+  display: none;
+}
+p {
+  color: tomato;
+}
+.helper {
+  display: none;
+}
+.emailtimer {
+  display: none;
+}
+input#code {
+  display: none;
+}
+div.pincode-input-container {
+  text-align: center;
+}
+div.pincode-input-container > input {
+  border: 50px;
+  border-radius: 10px;
+}

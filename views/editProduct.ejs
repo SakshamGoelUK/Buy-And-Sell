@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Product</title>
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="/stylesheets/newProduct.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Staatliches&display=swap" rel="stylesheet">
+        <% if(req.user){ %>
+            <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+            <script defer src="/js/navsocket.js"></script>
+        <% } %>
+</head>
+
+<body>
+    <div class="flash" style="position: fixed;z-index: 4;width: 100%;">
+        <%- include('./partials/flash') %>
+    </div>
+    <%- include('./partials/navbar') %>
+    <div class="card1">
+        <div class="card has-validation" style="width: 30rem;height: 34rem;">
+            <h4 class="card-title text-center">Edit your Product</h4>
+            <form action="/products/<%=data.productID%>?_method=PUT" method="post" autocomplete="off" id="submission" class="needs-validation" novalidate>
+
+
+                <div class="row g-3">
+
+                    <div class="col has-validation">
+                        <input type="text" class="form-control" placeholder="Product Name" aria-label="Product Name"
+                            id="name" name="name" value="<%=data.Name%>" required>
+                    </div>
+                </div>
+                <div class="row g-3">
+
+                    <div class="col has-validation">
+                        <input type="text" class="form-control" placeholder="Product Category" aria-label="Category"
+                            id="category" name="category" list="suggestions" value="<%=data.Category%>" required>
+                            <datalist id="suggestions">
+                                <option value="Appliances">
+                                <option value="Mobile Phones and Gadgets">
+                                <option value="Console and Video Games">
+                                <option value="Books">
+                                <option value="Motorvehicles"></option>
+                                <option value="Furniture"></option>
+                                <option value="Clothing and Accessories"></option>
+                                <option value="Sports And Fitness"></option>
+                                <option value="Others">
+                            </datalist>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col has-validation input-field">
+                        <input type="text" id="autocomplete-input" class="form-control country" name='country' placeholder="City" required>
+                      </div>
+
+                </div>
+                <div class="row g-3">
+                    <div class="col has-validation">
+                        <input type="text" class="form-control" placeholder="Asking Price(£)"
+                        aria-label="cost" id="price" name="price" value="<%=data.Price%>" required>
+                    </div>
+                    <div class="col has-validation">
+                        <input type="text" class="form-control" placeholder="Type" aria-label="Type"
+                            id="type" name="type" list="type-list" value="<%=data.Type%>" required>
+                        <datalist id="type-list">
+                            <option value="Old">Old</option>
+                            <option value="New">New</option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col has-validation">
+                    <input type="number" class="form-control" placeholder="Number of items in Stock"
+                        aria-label="stock" id="stock" name="stock" value="<%=data.Stock%>" required>
+                </div>
+                <div class="has-validation" style="color: #212529;">
+                    <textarea class="form-control" placeholder="Description of Product..." style="height: 100px;resize: none;" name="description" maxlength='500' required><%=data.Description%></textarea>
+<span><span>/500</span><span class="length">0</span></span>
+                  </div>
+                <div class="row g-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Add New Product</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/newProduct.js"></script>
+    <script src="/js/validation.js"></script>
+</body>
+
+</html>

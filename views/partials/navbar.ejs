@@ -1,0 +1,114 @@
+<nav>
+  <div class='row justify-content-end' id="logo">
+  <div id='brand' class="col-4" style="text-align: center;"><a href="/products/home" style="text-decoration: none;color: black;"><img src="/images/Shop.svg" alt="" width="300px" height="250px"></a></div>
+  <div id='account' class="col-4 p-0">
+
+    <div id="links">
+      <% if(homeSearch === 'false'){ %>
+        <div class="autoComplete_wrapper">
+          <form action="/products/item/search" method="post" id="navForm">
+
+            <input id="autoComplete" class="navSearch" name="search" type="text" tabindex="1" placeholder="Search Products">
+            <button class="btn navBtnSearch" type="submit" form="navForm"><img src="/images/search.svg" height="30px" width="30px"></button>
+
+        </form>
+      </div>
+      <% } %>
+
+        <button id="example" class="btn position-sticky"><img src="/images/account.svg" height="30px" width="30px">
+          <% if(req.user){ %>
+          <span class="position-absolute top-10 start-10 translate-middle badge rounded-pill bg-danger" id="badge">
+<% if(req.session.userData.notification === undefined){ %>
+0
+<% }else{ %>
+            <%=req.session.userData.notification%>
+            <% } %>
+          </span>
+          <% }%>
+        <div class="shape">
+          <div class="card" id="userOptions" style="width: 100%;">
+            <ul class="list-group list-group-flush" style="height:100%;">
+              <% if(!req.user){ %>
+                <li class="list-group-item"><a href="/user/login">Login</a></li>
+                <li class="list-group-item"><a href="/user/register">Register</a></li>
+                <% }else{ %>
+                  <li class="list-group-item"><a href="/products/newProduct">Add New Product</a></li>
+              <li class="list-group-item"><a href='/user/notifications'>Your Notifications</a></li>
+              <li class="list-group-item"><a href='/user/userprofile'>User Settings</a></li>
+              <li class="list-group-item"><a href='/products/yourProducts'>Your Products</a></li>
+              <li class="list-group-item"><a href='/user/Logout'>Logout</a></li>
+              <% } %>
+            </ul>
+          </div>
+
+      </div>
+      </button>
+      <button type="button" class="cartBtn btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <img src="/images/cart.svg" height="30px" width="30px">
+        <% if(cartProducts.length>0){ %>
+        <span class="position-absolute top-10 start-10 translate-middle badge rounded-pill bg-danger" style="top: 40px;">
+         <%= cartProducts.length %>
+          <span class="visually-hidden">Your Shopping Cart</span>
+        </span>
+        <% } %>
+      </button>
+
+    </div>
+    </div>
+    </div>
+</nav>
+<div class="cart offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: #88c9e2;">
+  <div class="offcanvas-header">
+    <h2 id="offcanvasRightLabel"><img src='/images/bags.svg' height="40px" width="40px">
+      Your Cart</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body p-0 m-0 myCart">
+   <% cartProducts.map((product)=>{ %>
+    <div class="cartItem " id="cart<%=product.productID%>" style="position:relative;color: black;
+    text-decoration: none;
+    font-style: italic;">
+    <span class="delete" data-deleteitem = '<%=product.productID%> ' style="cursor: pointer">
+      <img src="https://www.svgrepo.com/show/186288/trash-bin.svg" alt="" height="30px" width="30px" style="position: absolute;
+      right: 0;
+      margin: 10px;">
+    </span>
+    <a href="/products/item?productID=<%=product.productID%>">
+      <span class="cartImage">
+        <img src="<%=product.cartUrl%>" height="70px" width="70px" >
+      </span>
+    </a>
+<h5><%= product.Name %> </h5>
+<h6 class="price" style="display:inline-block"><%= product.Price %></h6><h6 style="display: inline-block;">£</h6>
+<h6><%= product.Stock %> left in stock</h6>
+    </div>
+    <% }) %>
+  </div>
+<div id="total"><h3 style="display: inline-block;">Total</h3>
+<h3 class="totalCost" style="display: inline-block;float: right;">0</h3>
+</div>
+</div>
+<script>
+let navUser
+
+try{
+  navUser =  JSON.parse('<%-JSON.stringify(req.session.userData)%>');
+}catch(e){}
+const account = document.querySelector('#example')
+const shape = document.querySelector('.shape')
+
+account.addEventListener('mouseover',()=>{
+  shape.style.display = 'block'
+  shape.focus()
+})
+shape.addEventListener('mouseover',()=>{
+  shape.style.display = 'block'
+})
+shape.addEventListener('mouseout',()=>{
+  shape.style.display = 'none'
+})
+account.addEventListener('mouseout',()=>{
+  shape.style.display = 'none'
+})
+
+</script>

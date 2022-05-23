@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/cookie.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="/stylesheets/footer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+    <link rel="shortcut icon" href="/images/logo.ico" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css" />
+    <% if(req.user){ %>
+      <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+      <script defer src="/js/navsocket.js"></script>
+  <% } %>
+    <title>HomePage</title>
+  </head>
+  <body>
+    <div class="flash" style="position: fixed; z-index: 4; width: 100%">
+      <%- include('./partials/flash') %>
+    </div>
+    <%- include('./partials/navbar') %>
+    <div class="container-fluid">
+      <div class="row first">
+        <div class="col-lg-6 heading animate__animated animate__bounceInLeft">
+          <h4>Shopping Media</h4>
+          <h1>Buying and Selling on our website is the way to go!</h1>
+          <h4>
+            The best of online and offline shopping just works together!
+            <form action="/products" method="get">
+              <button id="explore" class="mt-4">Explore Now</button>
+            </form>
+          </h4>
+        </div>
+        <div class="col-lg-5 image animate__animated animate__fadeIn">
+          <img src="/images/phone.png" alt="" width="300px" height="500px" />
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid search">
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <img
+            src="https://images.unsplash.com/photo-1572196284554-4e321b0e7e0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Boat on Calm Water"
+          />
+
+          <div class="product">
+            <div class="autoComplete_wrapper">
+              <form action="/products/item/search" method="post">
+                <input
+                  id="autoComplete"
+                  class="productSearch"
+                  name="search"
+                  type="text"
+                  tabindex="1"
+                  placeholder="Search Products"
+                />
+                <button type="submit" class="productBtn">
+                  <img
+                    src="/images/productSearch.svg"
+                    height="41px"
+                    width="35px"
+                    alt=""
+                  />
+                </button>
+              </form>
+            </div>
+            <div class="selection" style="display: none"></div>
+          </div>
+
+          <img
+            src="https://images.unsplash.com/photo-1555529669-26f9d103abdd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Wintry Mountain Landscape"
+          />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img
+            src="https://images.unsplash.com/photo-1555529771-122e5d9f2341?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Mountains in the Clouds"
+          />
+
+          <img
+            src="https://images.unsplash.com/photo-1532795986-dbef1643a596?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Boat on Calm Water"
+          />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <img
+            src="https://images.unsplash.com/photo-1593418631527-ef599fba72df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Waves at Sea"
+          />
+
+          <img
+            src="https://images.unsplash.com/photo-1589492477829-5e65395b66cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Yosemite National Park"
+          />
+        </div>
+      </div>
+      <!-- Gallery -->
+    </div>
+    <div
+      id="carouselExampleInterval"
+      class="carousel slide container-fluid myCarousel p-0"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <%newProducts.map((item,index)=>{%>
+          <% if(index === 0){ %>
+          <div class="carousel-item active" data-bs-interval="5000">
+            <div class="row">
+              <div class="col-6 captions">
+                <h4>New Arrivals</h4>
+                <h3 style="text-align:start;"><%=item.Seller%></h3>
+                <h2 style="text-align:start;"><%=item.Name%> </h2>
+                <a href="/products/item?productID=<%=item.productID%>" title="itemPage" class="productPageLink"
+                  >Check it Out</a
+                >
+              </div>
+              <div
+                class="col-6 productimage"
+                style="
+                background-size: cover;
+                  background-image: url('<%=item.image%>');
+                "
+              ></div>
+            </div>
+          </div>
+          <% }else{ %>
+            <div class="carousel-item" data-bs-interval="<%=5000*parseInt(index+1)%>">
+              <div class="row">
+                <div class="col-6 captions">
+                  <h4>New Arrivals</h4>
+                  <h3 style="text-align:start;"><%=item.Seller%></h3>
+                  <h2 style="text-align:start;"><%=item.Name%> </h2>
+                  <a href="/products/item?productID=<%=item.productID%>" title="itemPage" class="productPageLink"
+                    >Check it Out</a
+                  >
+                </div>
+                <div
+                  class="col-6 productimage"
+                  style="
+                  background-size: cover;
+                    background-image: url('<%=item.image%>');
+                  "
+                ></div>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="container-fluid features">
+      <div class="row">
+        <h2 class="heading">Features That Respect Your Choices</h2>
+        <div class="content">
+          <a class="card1" href="#!">
+            <div
+              class="front"
+              style="background-image: url(//source.unsplash.com/300x401)"
+            >
+              <lottie-player
+                src="https://assets4.lottiefiles.com/packages/lf20_qf1pt6ua.json"
+                background="transparent"
+                speed="1"
+                style="width: 200px; height: 200px"
+                loop
+                autoplay
+              ></lottie-player>
+
+              <h2>Privacy</h2>
+            </div>
+            <div class="back">
+              <div>
+                <p>We Say Privacy First</p>
+                <p>
+               All your passwords are encrypted so you are safe.And to top it all off,we only gather data needed to function the website.
+                </p>
+              </div>
+            </div></a
+          ><a class="card1" href="#!">
+            <div
+              class="front"
+              style="background-image: url(//source.unsplash.com/300x402)"
+            >
+              <lottie-player
+                src="https://assets2.lottiefiles.com/packages/lf20_dyimsq5i.json"
+                background="transparent"
+                speed="1"
+                style="width: 250px; height: 240px"
+                loop
+                autoplay
+              ></lottie-player>
+              <h2>Get Social</h2>
+            </div>
+            <div class="back">
+              <div>
+                <p>Social Media + ECommerce = Good Idea🤩
+                  <br>
+                With Like Buttons,Reviews/Comments,Profile Pics,Chatting and much more,do the two most things of your life at the same time.📲
+                </p>
+              </div>
+            </div></a
+          ><a class="card1" href="#!">
+            <div
+              class="front"
+              style="background-image: url(//source.unsplash.com/300x403)"
+            >
+              <lottie-player
+                src="https://assets8.lottiefiles.com/packages/lf20_yr6zz3wv.json"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 300px"
+                loop
+                autoplay
+              ></lottie-player>
+              <h3>Become a Pro-Shopper</h3>
+            </div>
+            <div class="back">
+              <div>
+                <p>Thinking of a podium finish? Aspire for a win,we say!🍾🥇</p>
+                <p>
+                  With dedicated chat rooms,notification toggles,and loads of other good stuff,Cart to save items for later,we got you covered to get the perfect deal.
+                </p>
+              </div>
+            </div></a
+          ><a class="card1" href="#!">
+            <div
+              class="front"
+              style="background-image: url(//source.unsplash.com/300x404)"
+            >
+              <lottie-player
+                src="https://assets4.lottiefiles.com/private_files/lf30_woef6qxo.json"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 240px"
+                loop
+                autoplay
+              ></lottie-player>
+              <h3>Control How You Sell</h3>
+            </div>
+            <div class="back">
+              <div>
+                <p>Your Products...Your Choice</p>
+                <p>
+                Unlike others,we give you the control on how you engage with your buyers.We just aspire to bring both of you together.😃
+                </p>
+              </div>
+            </div></a
+          ><a class="card1" href="#!">
+            <div
+              class="front"
+              style="background-image: url(//source.unsplash.com/300x405)"
+            >
+              <lottie-player
+                src="https://assets10.lottiefiles.com/packages/lf20_eDOZIr.json"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 220px"
+                loop
+                autoplay
+              ></lottie-player>
+              <h3>Never Miss A Thing!</h3>
+            </div>
+            <div class="back">
+              <div>
+                <p>We got Email and realTime Web Notifications.How do we this? Using Sockets😁</p>
+                <p>
+                Choose to get notifications about everything or nothing.....Your choice🙌
+                </p>
+              </div>
+            </div></a
+          ><a class="card1" href="#!">
+            <div
+              class="front"
+              style="background-image: url(//source.unsplash.com/300x406)"
+            >
+              <lottie-player
+                src="https://assets6.lottiefiles.com/packages/lf20_hy4txm7l.json"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 280px"
+                loop
+                autoplay
+              ></lottie-player>
+              <h4>Better with Authentication</h4>
+            </div>
+            <div class="back">
+              <div>
+                <p>With Industry Standard Password Auth with Google SignIn,Email Verification,we say privacy first.</p>
+                <p>
+                  Forgot ur Password or dont like it? Change it  Securely.
+                </p>
+              </div>
+            </div></a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="myVideo">
+      <video height="400px" width="100%" autoplay muted loop>
+        <source src="/images/pexels4.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="container-fluid join">
+      <div class="row">
+        <h2>Join Us</h2>
+        <p>
+          Take your shopping a notch up and give a chance to the future of
+          shopping
+        </p>
+        <div class="inputSec">
+          <div>
+            <form method="get" class="join1"></form>
+            <input
+              type="text"
+              placeholder="Enter your Email to get started"
+              name="email"
+              id="started"
+            />
+            <span style="padding: 1px" class="svg1"
+            ><img
+            src="https://www.svgrepo.com/show/34965/email.svg"
+            alt=""
+            width="28px"
+            height="25px"
+            /></span>
+
+            <button type="submit" class="sub">Get Started</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% if(req.session['Cookies-Accepted'] === undefined){ %>
+    <%- include('./partials/cookies') %>
+    <% } %>
+    <%- include('./partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="/js/cookie.js"></script>
+    <script src="/js/home.js"></script>
+  </body>
+</html>

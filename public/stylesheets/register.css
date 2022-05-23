@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h4 {
+  text-align: center;
+  color: tomato;
+}
+div.card {
+  border-radius: 10px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  background: inherit;
+  overflow: hidden;
+  padding: 1em;
+}
+div.card::before {
+  content: "";
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba(6, 83, 155, 0.5);
+  -webkit-filter: blur(20px);
+          filter: blur(20px);
+  margin: -20px;
+}
+form > div {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+label.form-check-label {
+  color: tomato;
+}
+body{
+  background-image: url(../images/purple-bg.svg);
+
+  background-attachment: fixed;
+  background-size: 100%;
+}
+
+div.card1 {
+  padding-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+div.flash {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 600px;
+}
+span#invalid {
+  display: none;
+}
+span#valid {
+  display: none;
+}
+svg[id^="success"] {
+  display: none;
+}
+.input-field ul {
+  cursor: pointer;
+  list-style-type: none;
+  z-index: 3;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: white;
+  border-radius: 5px;
+  margin: 0;
+  /* border-right: 1px #12034e solid;
+  border-left: 1px #12034e solid; */
+  padding: 0;
+}
+div.iti__selected-dial-code {
+  display: none;
+}
+ul li img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.input-field ul li:hover {
+  background-color: #7657f1;
+}
+.input-field ul li:active {
+  background-color: bisque;
+}
+ul li:focus {
+  background-color: bisque;
+}
+div.PasswordReq {
+  display: block;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+div.PasswordReq ul li {
+  margin-top: 2px;
+}
+textarea {
+  resize: none;
+}
+div.row{
+  --bs-gutter-x:0px
+}
+div.card{
+  width: 30rem;
+}
+div.dropdown li{
+  padding:7px
+}
+@media only screen and (max-width: 800px) {
+ div.card{
+   width: 22rem;
+ }
+  }
