@@ -9,6 +9,19 @@ This project aims at combining several features of social media and shopping web
 
 ## Technologies Used
 ExpressJs,VanillaJs,MySQL,CSS,EJS,WebSockets and a range of APIs such as ThreeJS and MapBox
+## Features of the Website
+<li>Encrypted Passwords</li><li>Email Verification</li>
+<li>Forgot Password</li>
+<li>Google OAuth Login</li>
+<li>Change Password</li>
+<li>Add profile picture</li>
+<li>Add/Modify/Delete Products</li>
+<li>Delist Porducts when not in stock</li>
+<li>Privacy Settings like email approvals required to share contact details</li>
+<li>Add Product Images(Hosted on the cloud)</li>
+<li>Dedicated Chat Rooms for each product using WebSockets</li>
+<li>Real Time Notifications as well as Notification Settings</li>
+
 ## Screenshots
 <p align='center'>
   <img width="800" height="450" src="https://res.cloudinary.com/dsxjfrucv/image/upload/v1653149312/Screenshot_30_eehw7y.png">
