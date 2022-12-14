@@ -67,10 +67,6 @@ Start the server after moving back to the parent project folder
 
 Create an Issue if this doesn't work for you.
 
-## Hosted Website
-  The website is hosted at this link: <a href="https://ecommercebuysell.herokuapp.com/products/home">Buy And Sell</a>
-  <br/>
-  Note : Due to limitations of a free hosting plan,the website might not perform well and be unpredicatable at times.In particular, the database access and websockets seem to be affected by this.All of them work flawlessly locally.
 ## LICENSE
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/SakshamGoelUK/Buy-And-Sell/blob/Saksham/LICENSE)
